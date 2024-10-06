@@ -1,0 +1,144 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "firstName": "John",
+      "lastName": "Doe",
+      "phoneNumber": "+1234567890",
+      "Department": "HR| Employee"
+    },
+    {
+      "id": "2",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "phoneNumber": "+0987654321",
+      "Department": "Marketing| Employee"
+    },
+    {
+      "id": "3",
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "phoneNumber": "+1122334455",
+      "Department": "Sales| Manager"
+    },
+    {
+      "id": "4",
+      "firstName": "Bob",
+      "lastName": "Brown",
+      "phoneNumber": "+2233445566",
+      "Department": "Finance| Manager"
+    },
+    {
+      "id": "5",
+      "firstName": "Charlie",
+      "lastName": "Davis",
+      "phoneNumber": "+3344556677",
+      "Department": "IT| Employee"
+    },
+    {
+      "id": "6",
+      "firstName": "Diana",
+      "lastName": "Evans",
+      "phoneNumber": "+4455667788",
+      "Department": "Operations| Employee"
+    },
+    {
+      "id": "7",
+      "firstName": "Ethan",
+      "lastName": "Garcia",
+      "phoneNumber": "+5566778899",
+      "Department": "Customer Support| Senior"
+    },
+    {
+      "id": "8",
+      "firstName": "Fiona",
+      "lastName": "Harris",
+      "phoneNumber": "+6677889900",
+      "Department": "Legal| Admin"
+    },
+    {
+      "id": "9",
+      "firstName": "George",
+      "lastName": "Martin",
+      "phoneNumber": "+7788990011",
+      "Department": "Product| Employee"
+    },
+    {
+      "id": "10",
+      "firstName": "Hannah",
+      "lastName": "Lee",
+      "phoneNumber": "+8899001122",
+      "Department": "Research"
+    },
+    {
+      "id": "11",
+      "firstName": "Ian",
+      "lastName": "Clark",
+      "phoneNumber": "+9900112233",
+      "Department": "Training"
+    },
+    {
+      "id": "12",
+      "firstName": "Jack",
+      "lastName": "Lewis",
+      "phoneNumber": "+1011121314",
+      "Department": "Quality Assurance"
+    },
+    {
+      "id": "13",
+      "firstName": "Kelly",
+      "lastName": "Walker",
+      "phoneNumber": "+1213141516",
+      "Department": "Procurement"
+    },
+    {
+      "id": "14",
+      "firstName": "Liam",
+      "lastName": "Hall",
+      "phoneNumber": "+1314151617",
+      "Department": "Business Development"
+    },
+    {
+      "id": "15",
+      "firstName": "Mia",
+      "lastName": "Young",
+      "phoneNumber": "+1415161718",
+      "Department": "Public Relations"
+    },
+    {
+      "id": "16",
+      "firstName": "Noah",
+      "lastName": "King",
+      "phoneNumber": "+1516171819",
+      "Department": "Strategy"
+    },
+    {
+      "id": "17",
+      "firstName": "Olivia",
+      "lastName": "Scott",
+      "phoneNumber": "+1617181920",
+      "Department": "Compliance"
+    },
+    {
+      "id": "18",
+      "firstName": "Paul",
+      "lastName": "Green",
+      "phoneNumber": "+1718192021",
+      "Department": "IT Support"
+    },
+    {
+      "id": "19",
+      "firstName": "Quinn",
+      "lastName": "Adams",
+      "phoneNumber": "+1819202122",
+      "Department": "Administration"
+    },
+    {
+      "id": "20",
+      "firstName": "Rachel",
+      "lastName": "Baker",
+      "phoneNumber": "+1920212223",
+      "Department": "Executive Management"
+    }
+  ]
+}
