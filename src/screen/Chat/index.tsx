@@ -10,11 +10,12 @@ import {dotModalData, Messagemodaldata} from '../../data/ModalData';
 import styles from './style';
 import ConfirmationModal from '../../components/modalComp';
 import {ScreenNames} from '../../navigator/screensName';
-import { emojis } from '../../data/ModalData';
+import {emojis} from '../../data/ModalData';
 
 interface CustomMessage extends IMessage {
   emoji?: string;
 }
+
 const Chat = ({
   route,
 }: {
@@ -35,66 +36,61 @@ const Chat = ({
   const [visible, setVisible] = useState<boolean>(false);
   const [dotModal, setDotModal] = useState<boolean>(false);
   const [inputText, setInputText] = useState<string>('');
-  const [messageToDelete, setMessageToDelete] = useState<string |number| null>(null);
+  const [messageToDelete, setMessageToDelete] = useState<
+    string | number | null
+  >(null);
   const [modalId, setModalId] = useState<number>(0);
-  const [confirmModalVisible, setConfirmModalVisible] = useState<boolean>(false);
-
+  const [confirmModalVisible, setConfirmModalVisible] =
+    useState<boolean>(false);
 
   const navigation = useNavigation<NavigationProp<RootStackType>>();
 
   useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const storedMessages = await AsyncStorage.getItem(`${userId}`);
-        if (storedMessages) {
-          const parsedMessages = JSON.parse(storedMessages);
-          setMessages(parsedMessages);
-          // console.log(parsedMessages);
-          
-        } else {
-          const initialMessages = [
-            {
-              _id: 1,
-              text: 'Hello developer',
-              createdAt: new Date(),
-              user: {
-                _id: 2,
-                name: 'React Native',
-                avatar: 'https://placeimg.com/140/140/any',
-              },
-            },
-          ];
-          setMessages(initialMessages);
-        }
-      } catch (error) {
-        console.error('Failed to fetch messages:', error);
-      }
-    };
-
     fetchMessages();
   }, [userId]);
 
+  const fetchMessages = async () => {
+    try {
+      const storedMessages = await AsyncStorage.getItem(`${userId}`);
+      if (storedMessages) {
+        const parsedMessages = JSON.parse(storedMessages);
+        setMessages(parsedMessages);
+      } else {
+        const initialMessages = [
+          {
+            _id: 1,
+            text: 'Hello developer',
+            createdAt: new Date(),
+            user: {
+              _id: 2,
+              name: 'React Native',
+              avatar: 'https://placeimg.com/140/140/any',
+            },
+          },
+        ];
+        setMessages(initialMessages);
+      }
+    } catch (error) {
+      console.error('Failed to fetch messages:', error);
+    }
+  };
+
   const handleEmojiSelect = (emoji: string) => {
-  
-    
     if (messageToDelete) {
-      const updatedMessages = messages.map((msg) => {
+      const updatedMessages = messages.map(msg => {
         if (msg._id === messageToDelete) {
           return {
             ...msg,
-            emoji: emoji, 
+            emoji: emoji,
           };
         }
         return msg;
       });
-     
-      
       setMessages(updatedMessages);
       AsyncStorage.setItem(`${userId}`, JSON.stringify(updatedMessages));
     }
     closeModal();
-};
-
+  };
 
   const toggleDotModal = () => {
     setModalId(2);
@@ -121,7 +117,6 @@ const Chat = ({
   };
 
   const deleteMsg = async () => {
-
     if (messageToDelete === null) return;
 
     const updatedMessages = messages.filter(
@@ -132,6 +127,7 @@ const Chat = ({
     setMessageToDelete(null);
     setConfirmModalVisible(false);
   };
+
   const onSend = async () => {
     if (inputText.trim().length === 0) return;
 
@@ -149,15 +145,41 @@ const Chat = ({
   };
 
   const DeleteAll = async () => {
-  
-
     setMessages([]);
-   
     await AsyncStorage.setItem(`${userId}`, JSON.stringify([]));
-    const checkasync = await AsyncStorage.getItem(`${userId}`);
-    console.log(checkasync);
-
     setConfirmModalVisible(false);
+  };
+
+  // const formatDate = (props:{currentMessage: CustomMessage}) => {
+  //   const today = new Date();
+
+  //   const isToday = date.getDate() === today.getDate() &&
+  //                   date.getMonth() === today.getMonth() &&
+  //                   date.getFullYear() === today.getFullYear();
+
+  //   return isToday ? 'Today' : date.toLocaleDateString(); // Change to desired date format
+  // };
+
+  const renderInputToolbar = () => {
+    // const { inputText, setInputText, onSend } = props;
+
+    return (
+      <View style={styles.inputContainer}>
+        <View style={styles.addView}>
+          <Text style={styles.addText}>+</Text>
+        </View>
+        <TextInput
+          style={styles.input}
+          placeholder="Type a message..."
+          value={inputText}
+          onChangeText={setInputText}
+          onSubmitEditing={onSend}
+        />
+        <TouchableOpacity style={styles.sendButton} onPress={onSend}>
+          <Image style={styles.sendButtonImage} source={Images.send} />
+        </TouchableOpacity>
+      </View>
+    );
   };
 
   const renderBubble = (props: {currentMessage: CustomMessage}) => {
@@ -194,9 +216,20 @@ const Chat = ({
               marginRight: isSender ? vw(10) : 0,
             },
           ]}>
-          {currentMessage.emoji&& (
+          {currentMessage.emoji && (
             <View
-            style={styles.emojiContainer}>
+              style={[
+                styles.emojiContainer,
+                isSender?
+                {
+                  bottom: vh(20),
+                  left: vw(-20),
+                }:
+                {
+                  bottom: vh(20),
+                  left: vw(105),
+                },
+              ]}>
               <Text style={styles.selectedEmoji}>{currentMessage.emoji}</Text>
             </View>
           )}
@@ -242,35 +275,17 @@ const Chat = ({
           />
         </TouchableOpacity>
       </View>
-      {/* {selectedEmoji && (
-        <Text style={styles.selectedEmoji}>{selectedEmoji}</Text>
-      )} */}
       <GiftedChat
         messages={messages}
         renderBubble={renderBubble}
         alignTop={true}
-        renderInputToolbar={() => null}
+        renderInputToolbar={renderInputToolbar}
+        // renderDay={formatDate}
         renderTime={() => null}
         user={{
           _id: 1,
         }}
       />
-
-      <View style={styles.inputContainer}>
-        <View style={styles.addView}>
-          <Text style={styles.addText}>+</Text>
-        </View>
-        <TextInput
-          style={styles.input}
-          placeholder="Type a message..."
-          value={inputText}
-          onChangeText={setInputText}
-          onSubmitEditing={onSend}
-        />
-        <TouchableOpacity style={styles.sendButton} onPress={onSend}>
-          <Image style={styles.sendButtonImage} source={Images.send} />
-        </TouchableOpacity>
-      </View>
 
       <CustomModal
         visible={visible}
@@ -288,7 +303,6 @@ const Chat = ({
         onPress={closeDotModal}
         confirmDelete={toggleDeleteModal}
       />
-
       <ConfirmationModal
         visible={confirmModalVisible}
         image={Images.confrmDelete}
