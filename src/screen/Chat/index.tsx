@@ -11,6 +11,7 @@ import styles from './style';
 import ConfirmationModal from '../../components/modalComp';
 import {ScreenNames} from '../../navigator/screensName';
 import {emojis} from '../../data/ModalData';
+import { Day } from './component/Day';
 
 interface CustomMessage extends IMessage {
   emoji?: string;
@@ -36,9 +37,7 @@ const Chat = ({
   const [visible, setVisible] = useState<boolean>(false);
   const [dotModal, setDotModal] = useState<boolean>(false);
   const [inputText, setInputText] = useState<string>('');
-  const [messageToDelete, setMessageToDelete] = useState<
-    string | number | null
-  >(null);
+  const [messageToDelete, setMessageToDelete] = useState<string | number | null>(null);
   const [modalId, setModalId] = useState<number>(0);
   const [confirmModalVisible, setConfirmModalVisible] =
     useState<boolean>(false);
@@ -67,6 +66,7 @@ const Chat = ({
               avatar: 'https://placeimg.com/140/140/any',
             },
           },
+          
         ];
         setMessages(initialMessages);
       }
@@ -150,19 +150,27 @@ const Chat = ({
     setConfirmModalVisible(false);
   };
 
-  // const formatDate = (props:{currentMessage: CustomMessage}) => {
-  //   const today = new Date();
-
-  //   const isToday = date.getDate() === today.getDate() &&
-  //                   date.getMonth() === today.getMonth() &&
-  //                   date.getFullYear() === today.getFullYear();
-
-  //   return isToday ? 'Today' : date.toLocaleDateString(); // Change to desired date format
-  // };
+  
+  const renderDay=(props:IMessage)=> {
+    return (
+      <Day
+        {...props}
+        textStyle={{
+          color: '#626567',
+          fontWeight: 'bold',
+          fontSize:13,
+          
+        }}
+        wrapperStyle={{
+          backgroundColor:'white',
+          padding:6,
+          borderRadius:8
+        }}
+      />
+    );
+  }
 
   const renderInputToolbar = () => {
-    // const { inputText, setInputText, onSend } = props;
-
     return (
       <View style={styles.inputContainer}>
         <View style={styles.addView}>
@@ -280,7 +288,9 @@ const Chat = ({
         renderBubble={renderBubble}
         alignTop={true}
         renderInputToolbar={renderInputToolbar}
-        // renderDay={formatDate}
+        renderDay={renderDay}
+        
+        keyboardShouldPersistTaps="never"
         renderTime={() => null}
         user={{
           _id: 1,

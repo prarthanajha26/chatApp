@@ -1,13 +1,14 @@
 import {StyleSheet} from 'react-native';
 import {vh, vw} from '../../utils/dimension';
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   upper: {
     backgroundColor: '#2196F3',
-    paddingTop: vh(50),
+    
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: vw(20),

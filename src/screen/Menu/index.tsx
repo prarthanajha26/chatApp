@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
+  Keyboard,
 } from 'react-native';
 import {Images} from '../../assets';
 import styles from './style';
@@ -15,6 +16,9 @@ import {ScreenNames} from '../../navigator/screensName';
 import {modaldata} from '../../data/ModalData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import data from '../../data/data.json';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { vh } from '../../utils/dimension';
+
 
 interface User {
   id: number | string;
@@ -34,6 +38,7 @@ const Menu: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const navigation = useNavigation<any>();
   const isFocused = useIsFocused();
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     checkChats();
@@ -77,7 +82,9 @@ const Menu: React.FC = () => {
   };
 
   const navigateToContact = () => {
+    Keyboard.dismiss()
     navigation.navigate(ScreenNames.contactSync);
+    
   };
 
   const closeModal = () => {
@@ -89,6 +96,7 @@ const Menu: React.FC = () => {
     firstName: string,
     lastName: string,
   ) => {
+    Keyboard.dismiss()
     navigation.navigate(ScreenNames.chat, {
       userId: id,
       initials: getInitials(firstName, lastName),
@@ -129,12 +137,13 @@ const Menu: React.FC = () => {
 
   const filteredUsers = chattedUser.filter(user => {
     const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+    // console.log(fullName.includes(searchQuery.toLowerCase()));
     return fullName.includes(searchQuery.toLowerCase());
   });
 
   return (
     <View style={styles.container}>
-      <View style={styles.upper}>
+      <View style={[styles.upper,{paddingTop: insets.top+vh(30),}]}>
         <View>
           <Text style={styles.chatsText}>Messages</Text>
           <Text style={styles.contactText}>45 Contacts</Text>
@@ -154,11 +163,11 @@ const Menu: React.FC = () => {
             style={styles.input}
             placeholder="Search Messages..."
             value={searchQuery}
-            onChangeText={setSearchQuery} // Update search query state
+            onChangeText={setSearchQuery} 
           />
           <Image style={styles.inputIcon} source={Images.blackSearch} />
         </View>
-        <View style={styles.announcementContainer}>
+        {/* <View style={styles.announcementContainer}>
           <View style={styles.announcementIconContainer}>
             <Image
               resizeMode="contain"
@@ -167,7 +176,7 @@ const Menu: React.FC = () => {
             />
           </View>
           <Text style={styles.userPhone}>Announcement</Text>
-        </View>
+        </View> */}
         {filteredUsers.length === 0 ? (
           <View style={styles.chatsContainer}>
             <View style={styles.middleChat}>

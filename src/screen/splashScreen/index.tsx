@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './style';
 import { Images } from '../../assets';
 import { ScreenNames } from '../../navigator/screensName';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Splash: React.FC = () => {
     const navigation = useNavigation<any>();

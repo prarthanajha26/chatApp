@@ -25,6 +25,7 @@ const ContactSearch: React.FC = () => {
     setInput(Data.users as [])
   }, []);
 
+  
   const handleChange = (query: string) => {
     if (query !== '') {
       const filteredUsers = input.filter(

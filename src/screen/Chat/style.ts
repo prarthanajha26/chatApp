@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: vw(20),
     paddingVertical: vh(10),
-    paddingBottom: vh(30),
+    paddingBottom: vh(45),
     backgroundColor: '#f8f9f9',
   },
   input: {
